@@ -1,59 +1,74 @@
 package org.yehorbukh;
 
-import javafx.beans.property.SimpleStringProperty;
-
-import java.util.Date;
-
 public class ToDoItem {
-    private String name;
-    private String author;
-    private String context;
-    private String deadlineDate;
+    private Integer id;
+    private final String name;
+    private final String author;
+    private final String context;
+    private final String deadlineDate;
+    private final String creationDate;
+    private ItemState itemState;
 
-//    public ToDoItem(String name, String author, String context, String deadlineDate) {
-//        this.name = new SimpleStringProperty(name);
-//        this.author = new SimpleStringProperty(author);
-//        this.context = new SimpleStringProperty(context);
-//        this.deadlineDate = new SimpleStringProperty(deadlineDate);
-//    }
-
-    public ToDoItem(String name, String author, String context, String deadlineDate) {
+    public ToDoItem(Integer id, String name,
+                    String author, String context,
+                    String deadlineDate, String creationDate,
+                    ItemState itemState)
+    {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.context = context;
         this.deadlineDate = deadlineDate;
+        this.creationDate = creationDate;
+        this.itemState = itemState;
+    }
+
+    public ToDoItem(String name, String author,
+                    String context, String deadlineDate,
+                    String creationDate, ItemState itemState)
+    {
+        this.name = name;
+        this.author = author;
+        this.context = context;
+        this.deadlineDate = deadlineDate;
+        this.creationDate = creationDate;
+        this.itemState = itemState;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getContext() {
         return context;
     }
 
-    public void setContext(String context) {
-        this.context = context;
-    }
-
     public String getDeadlineDate() {
         return deadlineDate;
     }
 
-    public void setDeadlineDate(String deadlineDate) {
-        this.deadlineDate = deadlineDate;
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public ItemState getItemState() {
+        return itemState;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setItemState(ItemState itemState) {
+        this.itemState = itemState;
     }
 
     @Override

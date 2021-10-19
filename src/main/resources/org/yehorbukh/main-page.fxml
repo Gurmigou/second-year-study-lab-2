@@ -55,8 +55,8 @@
       <menus>
         <Menu mnemonicParsing="false" text="Файл">
           <items>
-            <MenuItem mnemonicParsing="false" text="Експорт" />
-            <MenuItem mnemonicParsing="false" text="Вийти" />
+            <MenuItem fx:id="export" mnemonicParsing="false" onAction="#onExportAction"  text="Експорт" />
+            <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#onExitAction" text="Вийти" />
           </items>
         </Menu>
       </menus>

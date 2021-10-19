@@ -9,12 +9,23 @@ public class Database {
     private static final String username = "root";
     private static final String password = "bmw555x6";
 
+    private static Database database;
+
     static {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private Database() {
+    }
+
+    public static Database getInstance() {
+        if (database == null)
+            database = new Database();
+        return database;
     }
 
     private Connection getConnection() throws SQLException {
@@ -85,6 +96,33 @@ public class Database {
     public void deleteToDoItem(int id) throws SQLException {
         Connection connection = getConnection();
         String query = "DELETE FROM todo_list WHERE id = " + id + ";";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+    }
+
+    public List<Context> selectContextList() throws SQLException {
+        Connection connection = getConnection();
+        String query = "SELECT context, COUNT(*) AS num_of_tasks FROM todo_list WHERE itemState != 'ARCHIVED' GROUP BY context";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Context> list = new ArrayList<>();
+
+        while (resultSet.next()) {
+            Context context = new Context (
+                    resultSet.getString("context"),
+                    resultSet.getInt("num_of_tasks")
+            );
+            list.add(context);
+        }
+
+        return list;
+    }
+
+    public void deleteContextWithName(String name) throws SQLException {
+        Connection connection = getConnection();
+        String query = "DELETE FROM todo_list WHERE context = '" + name + "';";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
     }

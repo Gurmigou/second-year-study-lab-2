@@ -1,18 +1,17 @@
 package org.yehorbukh;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
@@ -47,21 +46,24 @@ public class MainPageController implements Initializable {
 
     @FXML
     public MenuItem menuItemAddToArchive;
+
     @FXML
     public MenuItem menuItemDelete;
 
-    private final Database database = new Database();
+    @FXML
+    public MenuItem export;
+
+    @FXML
+    public MenuItem exit;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        contextColumn.setCellValueFactory(new PropertyValueFactory<>("context"));
-        deadlineDataColumn.setCellValueFactory(new PropertyValueFactory<>("deadlineDate"));
-        creationDate.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
-
+        CommonController.initToDoTableView(
+                List.of(taskNameColumn, authorColumn,
+                        contextColumn, deadlineDataColumn,
+                        creationDate));
         try {
-            List<ToDoItem> toDoItems = database.selectToDoItems("WHERE itemState != 'ARCHIVED'");
+            List<ToDoItem> toDoItems = Database.getInstance().selectToDoItems("WHERE itemState != 'ARCHIVED'");
             tableView.getItems().addAll(toDoItems);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,8 +71,14 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void switchToContextButton(ActionEvent actionEvent) {
-        System.out.println("1");
+    public void switchToContextButton(ActionEvent actionEvent) throws IOException {
+        App.setRoot("context-list-page");
+    }
+
+    @FXML
+    public void switchToArchiveButton(ActionEvent actionEvent) throws IOException {
+        DataHolder.getInstance().setValue("ARCHIVED");
+        App.setRoot("view-page");
     }
 
     private boolean objectsRequireNonNull(Object... objects) {
@@ -95,7 +103,7 @@ public class MainPageController implements Initializable {
                     LocalDate.now().toString(), ItemState.AVAILABLE);
             tableView.getItems().add(toDoItem);
             try {
-                database.addToDoItem(toDoItem);
+                Database.getInstance().addToDoItem(toDoItem);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -103,13 +111,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void switchToArchiveButton(ActionEvent actionEvent) {
-        System.out.println("3");
-    }
-
-    @FXML
     public void doOnSort(SortEvent<ToDoItem> tableViewSortEvent) {
-
     }
 
     @FXML
@@ -119,7 +121,8 @@ public class MainPageController implements Initializable {
             toDoItem.setItemState(ItemState.ARCHIVED);
             tableView.getItems().remove(toDoItem);
             try {
-                database.updateToDoItemState(toDoItem.getId(), ItemState.ARCHIVED);
+                Database.getInstance().updateToDoItemState(toDoItem.getId(), ItemState.ARCHIVED);
+                DataHolder.getInstance().setValue("ARCHIVED");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -132,10 +135,20 @@ public class MainPageController implements Initializable {
         if (toDoItem != null) {
             tableView.getItems().remove(toDoItem);
             try {
-                database.deleteToDoItem(toDoItem.getId());
+                Database.getInstance().deleteToDoItem(toDoItem.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    public void onExportAction(ActionEvent actionEvent) {
+        CommonController.exportData();
+    }
+
+    @FXML
+    public void onExitAction(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

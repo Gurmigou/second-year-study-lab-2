@@ -1,22 +1,13 @@
 package org.yehorbukh;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.temporal.TemporalAmount;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * JavaFX App
@@ -27,9 +18,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("main_page"));
+        scene = new Scene(loadFXML("main-page"));
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("app_logo.png"));
     }
 
     static void setRoot(String fxml) throws IOException {

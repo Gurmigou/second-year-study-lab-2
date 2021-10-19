@@ -1,5 +1,7 @@
 package org.yehorbukh;
 
+import java.util.Objects;
+
 public class ToDoItem {
     private Integer id;
     private final String name;
@@ -79,6 +81,19 @@ public class ToDoItem {
                 ", context='" + context + '\'' +
                 ", deadlineDate=" + deadlineDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ToDoItem toDoItem = (ToDoItem) o;
+        return Objects.equals(id, toDoItem.id) && Objects.equals(name, toDoItem.name) && Objects.equals(author, toDoItem.author) && Objects.equals(context, toDoItem.context) && Objects.equals(deadlineDate, toDoItem.deadlineDate) && Objects.equals(creationDate, toDoItem.creationDate) && itemState == toDoItem.itemState;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, author, context, deadlineDate, creationDate, itemState);
     }
 }
 

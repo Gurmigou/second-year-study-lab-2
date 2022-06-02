@@ -53,6 +53,14 @@ public class Database {
                 ItemState.valueOf(rs.getString("itemState"))
         );
     }
+    private List<ToDoItem> filterByContext(List<ToDoItem> items, String context) {
+        List<ToDoItem> result = new ArrayList<>();
+        for (ToDoItem item : items) {
+            if (item.getContext().equals(context))
+                result.add(item);
+        }
+        return result;
+    }
 
     public List<ToDoItem> selectToDoItems(String whereFilter) throws SQLException {
         String query = "SELECT * FROM todo_list" +
@@ -133,6 +141,33 @@ public class Database {
     public void deleteContextWithName(String name) throws SQLException {
         Connection connection = getConnection();
         String query = "DELETE FROM todo_list WHERE context = '" + name + "';";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+    }
+
+    public void deleteAllTasks() throws SQLException {
+        Connection connection = getConnection();
+        String query = "DELETE FROM todo_list;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+    }
+
+    /**
+     * This method deletes all tasks from the database which are archived.
+     */
+    public void deleteArchived() throws SQLException {
+        Connection connection = getConnection();
+        String query = "DELETE FROM todo_list WHERE itemState = 'ARCHIVED';";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+    }
+
+    /**
+     * This method deletes all tasks from the database which are completed.
+     */
+    public void deleteCompleted() throws SQLException {
+        Connection connection = getConnection();
+        String query = "DELETE FROM todo_list WHERE itemState = 'COMPLETED';";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
     }

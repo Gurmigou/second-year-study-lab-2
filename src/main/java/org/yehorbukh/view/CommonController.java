@@ -30,6 +30,18 @@ public class CommonController {
         }
     }
 
+    /**
+     * Exports data to a file.
+     */
+    public static void exportToFile(List<ToDoItem> items) throws IOException {
+        Path path = Path.of(PATH);
+        Files.deleteIfExists(path);
+        Files.createFile(path);
+        for (ToDoItem item : items) {
+            Files.write(path, item.toString().getBytes(), StandardOpenOption.APPEND);
+        }
+    }
+
     public static void exportData() {
         try {
             List<ToDoItem> toDoItems = Database
@@ -37,9 +49,15 @@ public class CommonController {
                     .selectToDoItems("");
 
             StringBuilder sb = new StringBuilder();
+
             toDoItems.forEach(s -> sb.append(s).append('\n'));
 
-            Files.writeString(Path.of(PATH), sb.toString(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.writeString(
+                    Path.of(PATH),
+                    sb.toString(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING
+            );
 
         } catch (SQLException | IOException e) {
             e.printStackTrace();

@@ -101,5 +101,57 @@ public class ToDoItem {
     public int hashCode() {
         return Objects.hash(id, name, author, context, deadlineDate, creationDate, itemState);
     }
+
+    /**
+     * Builder class for {@link ToDoItem}
+     */
+    public static class ToDoItemBuilder {
+        private Integer id;
+        private String name;
+        private String author;
+        private String context;
+        private String deadlineDate;
+        private String creationDate;
+        private ItemState itemState;
+
+        public ToDoItemBuilder setId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public ToDoItemBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ToDoItemBuilder setAuthor(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public ToDoItemBuilder setContext(String context) {
+            this.context = context;
+            return this;
+        }
+
+        public ToDoItemBuilder setDeadlineDate(String deadlineDate) {
+            this.deadlineDate = deadlineDate;
+            return this;
+        }
+
+        public ToDoItemBuilder setCreationDate(String creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        public ToDoItemBuilder setItemState(ItemState itemState) {
+            this.itemState = itemState;
+            return this;
+        }
+
+        public ToDoItem build() {
+            return new ToDoItem(id, name, author, context, deadlineDate, creationDate, itemState);
+        }
+    }
 }
 

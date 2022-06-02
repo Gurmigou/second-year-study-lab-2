@@ -49,7 +49,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="534.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yehorbukh.MainPageController">
+<VBox prefHeight="534.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yehorbukh.view.MainPageController">
   <children>
     <MenuBar prefWidth="743.0" VBox.vgrow="NEVER">
       <menus>

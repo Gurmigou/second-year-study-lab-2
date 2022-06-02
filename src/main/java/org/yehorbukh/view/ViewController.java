@@ -1,11 +1,14 @@
-package org.yehorbukh;
+package org.yehorbukh.view;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import org.yehorbukh.App;
+import org.yehorbukh.dao.Database;
+import org.yehorbukh.model.DataHolder;
+import org.yehorbukh.model.ToDoItem;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +16,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This controller initializes table data by extracting it from the database.
+ */
 public class ViewController implements Initializable {
     @FXML
     public Button allTasks;

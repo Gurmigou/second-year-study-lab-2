@@ -1,19 +1,31 @@
-package org.yehorbukh;
+package org.yehorbukh.view;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.yehorbukh.App;
+import org.yehorbukh.dao.Database;
+import org.yehorbukh.model.DataHolder;
+import org.yehorbukh.model.ItemState;
+import org.yehorbukh.model.ToDoItem;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
+/**
+ * This controller is a start point of the application.
+ * It represents a main page (or main window in terminology
+ * of JavaFX application).
+ * Moreover, this class carries
+ * information of different buttons, table columns, text fields,
+ * menu items and so on.
+ * It contains logic which handles events such as mouse click.
+ */
 public class MainPageController implements Initializable {
     @FXML
     public Button contextButton;
@@ -82,11 +94,7 @@ public class MainPageController implements Initializable {
     }
 
     private boolean objectsRequireNonNull(Object... objects) {
-        for (Object o : objects) {
-            if (o == null)
-                return false;
-        }
-        return true;
+        return Arrays.stream(objects).noneMatch(Objects::isNull);
     }
 
     private boolean allFieldAreFilled() {

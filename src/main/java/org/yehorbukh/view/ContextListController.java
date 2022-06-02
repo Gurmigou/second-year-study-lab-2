@@ -1,4 +1,4 @@
-package org.yehorbukh;
+package org.yehorbukh.view;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -6,6 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.yehorbukh.App;
+import org.yehorbukh.dao.Database;
+import org.yehorbukh.model.Context;
+import org.yehorbukh.model.DataHolder;
+import org.yehorbukh.view.CommonController;
 
 import java.io.IOException;
 import java.net.URL;

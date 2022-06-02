@@ -6,4 +6,10 @@ module org.yehorbukh {
 
     opens org.yehorbukh to javafx.fxml;
     exports org.yehorbukh;
+    exports org.yehorbukh.dao;
+    opens org.yehorbukh.dao to javafx.fxml;
+    exports org.yehorbukh.model;
+    opens org.yehorbukh.model to javafx.fxml;
+    exports org.yehorbukh.view;
+    opens org.yehorbukh.view to javafx.fxml;
 }

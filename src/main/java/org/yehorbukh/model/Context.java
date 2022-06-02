@@ -1,7 +1,11 @@
-package org.yehorbukh;
+package org.yehorbukh.model;
 
 import java.util.Objects;
 
+/**
+ * Represents a data transfer object which carries information
+ * about context name and number of tasks it contains.
+ */
 public class Context {
     private String context;
     private int numOfTasks;

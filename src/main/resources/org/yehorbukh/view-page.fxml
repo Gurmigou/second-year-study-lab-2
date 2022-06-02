@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="534.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yehorbukh.ViewController">
+<VBox prefHeight="534.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.yehorbukh.view.ViewController">
   <children>
     <MenuBar prefWidth="743.0" VBox.vgrow="NEVER">
       <menus>

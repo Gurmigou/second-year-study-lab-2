@@ -1,13 +1,23 @@
-package org.yehorbukh;
+package org.yehorbukh.dao;
+
+import org.yehorbukh.model.Context;
+import org.yehorbukh.model.ItemState;
+import org.yehorbukh.model.ToDoItem;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is an abstraction to work with the database correlated with this application.
+ * It provides ease-to-use methods to execute create, read, update, delete operations.
+ * Internally this class uses MySQL as an instance of relational-data-base. You can easily
+ * change RDBMS provider by changing the JDBC driver.
+ */
 public class Database {
     private static final String URL = "jdbc:mysql://localhost:3306/lab2_ui_todo_list";
     private static final String username = "root";
-    private static final String password = "bmw555x6";
+    private static final String password = "root";
 
     private static Database database;
 

@@ -1,16 +1,22 @@
-package org.yehorbukh;
+package org.yehorbukh.view;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.yehorbukh.dao.Database;
+import org.yehorbukh.model.ToDoItem;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * A controller (representation of the window in JavaFX)
+ * This class represents a window which contains a table with
+ * information of to-do fields.
+ */
 public class CommonController {
     private static final List<String> todoFields =
             List.of("name", "author", "context", "deadlineDate", "creationDate");

@@ -1,7 +1,13 @@
-package org.yehorbukh;
+package org.yehorbukh.model;
 
 import java.util.Objects;
 
+/**
+ * Data transfer object which contains all information
+ * about to-do item. It is used all around the application
+ * and is also represents an entity which is stored in the
+ * database.
+ */
 public class ToDoItem {
     private Integer id;
     private final String name;

@@ -38,6 +38,34 @@ public class Database {
         return database;
     }
 
+    public int getSize() {
+        int size = 0;
+        try (Connection connection = DriverManager.getConnection(URL, username, password);
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM todo_list");
+            if (resultSet.next())
+                size = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+
+    // select all todo items
+    public List<ToDoItem> getAll() {
+        List<ToDoItem> items = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, username, password);
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM todo_list");
+            while (resultSet.next()) {
+                items.add(mapToTodoItem(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, username, password);
     }
